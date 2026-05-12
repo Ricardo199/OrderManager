@@ -46,6 +46,8 @@ Current value in source:
 
 `Server=localhost\SQLEXPRESS; Database=OMS; Trusted_Connection=True; Encrypt=False`
 
+⚠️ This source value is intended only as a local development reference and should not be used for production environments.
+
 Update this value to match your SQL Server instance.
 
 Recommended production baseline:
@@ -53,6 +55,7 @@ Recommended production baseline:
 `Server=YOUR_SERVER;Database=OMS;Trusted_Connection=True;Encrypt=True;TrustServerCertificate=False`
 
 Use a valid server certificate and keep `TrustServerCertificate=False` to enforce certificate validation.
+If Windows authentication is not appropriate for your environment, use a secure alternative authentication method supported by SQL Server.
 
 ## Run the Application
 
