@@ -6,10 +6,10 @@ OrderManager is a Windows desktop application for viewing basket contents and ad
 
 The application provides a focused workflow for order maintenance:
 
-- list basket details for a selected shopper
-- add products to an existing basket
-- update basket quantity and subtotal in SQL Server
-- refresh basket line items after changes
+- List basket details for a selected shopper
+- Add products to an existing basket
+- Update basket quantity and subtotal in SQL Server
+- Refresh basket line items after changes
 
 ## Technology
 
@@ -45,6 +45,8 @@ Database connection is configured in `Connection.cs`:
 `Server=localhost\SQLEXPRESS; Database=OMS; Trusted_Connection=True; Encrypt=False`
 
 Update this value to match your SQL Server instance.
+
+> For production deployments, use encrypted database connections (for example, set `Encrypt=True` with appropriate certificate validation).
 
 ## Run the Application
 
