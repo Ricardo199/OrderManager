@@ -40,13 +40,19 @@ Mappings and table configuration are defined in `Connection.cs`.
 
 ## Configuration
 
-Database connection is configured in `Connection.cs`:
+Database connection is configured in `Connection.cs`.
+
+Current value in source:
 
 `Server=localhost\SQLEXPRESS; Database=OMS; Trusted_Connection=True; Encrypt=False`
 
 Update this value to match your SQL Server instance.
 
-> For production deployments, use encrypted database connections (for example, set `Encrypt=True` with appropriate certificate validation).
+Recommended production baseline:
+
+`Server=YOUR_SERVER;Database=OMS;Trusted_Connection=True;Encrypt=True;TrustServerCertificate=False`
+
+Use a valid server certificate and keep `TrustServerCertificate=False` to enforce certificate validation.
 
 ## Run the Application
 
