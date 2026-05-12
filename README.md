@@ -25,7 +25,7 @@ The application provides a focused workflow for order maintenance:
 - `Basket`
 - `BasketItem`
 
-Mappings and table configuration are defined in `/home/runner/work/OrderManager/OrderManager/Connection.cs`.
+Mappings and table configuration are defined in `Connection.cs`.
 
 ## Prerequisites
 
@@ -40,7 +40,7 @@ Mappings and table configuration are defined in `/home/runner/work/OrderManager/
 
 ## Configuration
 
-Database connection is configured in `/home/runner/work/OrderManager/OrderManager/Connection.cs`:
+Database connection is configured in `Connection.cs`:
 
 `Server=localhost\SQLEXPRESS; Database=OMS; Trusted_Connection=True; Encrypt=False`
 
@@ -48,7 +48,7 @@ Update this value to match your SQL Server instance.
 
 ## Run the Application
 
-From `/home/runner/work/OrderManager/OrderManager`:
+From the repository root:
 
 ```bash
 dotnet build OrderManager.sln
@@ -59,10 +59,10 @@ Or open `OrderManager.sln` in Visual Studio and run the project.
 
 ## Repository Layout
 
-- `/home/runner/work/OrderManager/OrderManager/MainWindow.xaml` – main UI layout
-- `/home/runner/work/OrderManager/OrderManager/MainWindow.xaml.cs` – UI event handlers and order workflows
-- `/home/runner/work/OrderManager/OrderManager/Connection.cs` – EF Core `DbContext` and entity mapping
-- `/home/runner/work/OrderManager/OrderManager/*.cs` – domain entities
+- `MainWindow.xaml` – main UI layout
+- `MainWindow.xaml.cs` – UI event handlers and order workflows
+- `Connection.cs` – EF Core `DbContext` and entity mapping
+- `*.cs` – domain entities
 
 ## License
 
