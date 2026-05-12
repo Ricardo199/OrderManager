@@ -1,108 +1,69 @@
 # OrderManager
 
-A Windows desktop application for managing customer orders and shopping baskets, built with C# and WPF on .NET 8.
+OrderManager is a Windows desktop application for viewing basket contents and adding products to customer orders.
 
----
+## Overview
 
-## Features
+The application provides a focused workflow for order maintenance:
 
-- **View Baskets** — Select any shopper's basket by email and instantly see all items, unit prices, and quantities in a structured data grid.
-- **Add Items to Basket** — Add products to an existing basket with a specified quantity. If the product already exists in the basket, the quantity is incremented automatically.
-- **Automatic Totals** — Basket subtotal and total item count are recalculated and persisted to the database whenever items are added.
-- **Live Data Refresh** — The basket grid refreshes immediately after any change, keeping the view in sync with the database.
+- list basket details for a selected shopper
+- add products to an existing basket
+- update basket quantity and subtotal in SQL Server
+- refresh basket line items after changes
 
----
+## Technology
 
-## Tech Stack
+- **Framework:** .NET 8 (`net8.0-windows`)
+- **UI:** WPF
+- **Data Access:** Entity Framework Core + SQL Server
+- **Packages:** `Microsoft.EntityFrameworkCore`, `Microsoft.EntityFrameworkCore.SqlServer`, `Microsoft.Data.SqlClient`, `MvvmLightLibs`
 
-| Layer | Technology |
-|---|---|
-| UI Framework | WPF (.NET 8, Windows) |
-| ORM | Entity Framework Core 9 |
-| Database | SQL Server (SQL Server Express) |
-| MVVM Utilities | MvvmLightLibs |
+## Domain Model
 
----
+- `Shopper`
+- `Product`
+- `Basket`
+- `BasketItem`
 
-## Data Model
-
-| Entity | Key Fields |
-|---|---|
-| `Shopper` | `IdShopper`, `Email`, `FirstName`, `LastName`, `Address`, `City`, `StateProvince`, `Country`, `ZipCode` |
-| `Product` | `IdProduct`, `ProductName`, `Description`, `Price` |
-| `Basket` | `IdBasket`, `IdShopper`, `OrderDate`, `Quantity`, `SubTotal` |
-| `BasketItem` | `IdBasketItem`, `IdBasket`, `IdProduct`, `Quantity` |
-
----
+Mappings and table configuration are defined in `/home/runner/work/OrderManager/OrderManager/Connection.cs`.
 
 ## Prerequisites
 
-- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
-- SQL Server or SQL Server Express with the `OMS` database configured
+- Windows environment
+- .NET 8 SDK
+- SQL Server / SQL Server Express
+- `OMS` database with tables:
+  - `Shopper`
+  - `Product`
+  - `Basket`
+  - `BasketItem`
 
----
+## Configuration
 
-## Getting Started
+Database connection is configured in `/home/runner/work/OrderManager/OrderManager/Connection.cs`:
 
-1. **Clone the repository**
+`Server=localhost\SQLEXPRESS; Database=OMS; Trusted_Connection=True; Encrypt=False`
 
-   ```bash
-   git clone https://github.com/Ricardo199/OrderManager.git
-   cd OrderManager
-   ```
+Update this value to match your SQL Server instance.
 
-2. **Configure the database connection**
+## Run the Application
 
-   The connection string is defined in `Connection.cs`. By default it targets a local SQL Server Express instance:
+From `/home/runner/work/OrderManager/OrderManager`:
 
-   ```
-   Server=localhost\SQLEXPRESS; Database=OMS; Trusted_Connection=True; Encrypt=False
-   ```
-
-   Update the `connectionString` field if your SQL Server instance name or credentials differ.
-
-3. **Set up the database**
-
-   Ensure the `OMS` database exists and contains the following tables matching the entity definitions: `Product`, `Shopper`, `Basket`, `BasketItem`.
-
-4. **Build and run**
-
-   Open `OrderManager.sln` in Visual Studio 2022+ and press **F5**, or build from the command line:
-
-   ```bash
-   dotnet build
-   dotnet run --project OrderManager.csproj
-   ```
-
----
-
-## Usage
-
-| Action | How |
-|---|---|
-| Load a basket | Select a shopper email + basket ID from the **Basket** dropdown, then click **Load**. |
-| Add an item | Click **Add Item to Order**, choose a basket and product, enter a quantity, then click **Save**. |
-| Cancel | Click **Cancel** and confirm the prompt to discard the current add-item form. |
-| Exit | Click **Exit** to close the application. |
-
----
-
-## Project Structure
-
-```
-OrderManager/
-├── App.xaml / App.xaml.cs        # Application entry point
-├── MainWindow.xaml / .cs         # Main UI and interaction logic
-├── Connection.cs                 # EF Core DbContext and model configuration
-├── Product.cs                    # Product entity
-├── Shopper.cs                    # Shopper entity
-├── Basket.cs                     # Basket entity
-├── BasketItem.cs                 # BasketItem entity
-└── OrderManager.csproj           # Project file
+```bash
+dotnet build OrderManager.sln
+dotnet run --project OrderManager.csproj
 ```
 
----
+Or open `OrderManager.sln` in Visual Studio and run the project.
+
+## Repository Layout
+
+- `/home/runner/work/OrderManager/OrderManager/MainWindow.xaml` – main UI layout
+- `/home/runner/work/OrderManager/OrderManager/MainWindow.xaml.cs` – UI event handlers and order workflows
+- `/home/runner/work/OrderManager/OrderManager/Connection.cs` – EF Core `DbContext` and entity mapping
+- `/home/runner/work/OrderManager/OrderManager/*.cs` – domain entities
 
 ## License
 
-This project is licensed under the terms found in [LICENSE.txt](LICENSE.txt).
+See [LICENSE.txt](LICENSE.txt).
